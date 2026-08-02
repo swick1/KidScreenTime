@@ -35,30 +35,6 @@ auto-update check. See **[what this app actually does to your PC](https://swick1
 for specifics on what gets installed, what the keyboard hook can (and can't) see, and how to
 verify a download yourself.
 
-## Project layout
-
-| Folder | What's in it |
-|---|---|
-| `KidScreenTime/` | The main WPF app (C#, .NET 8). |
-| `Watchdog/` | A small companion process that keeps the main app running if it's closed. |
-| `installer/` | The Inno Setup script used to build the distributable installer. |
-| `docs/website/` | The source for the project website (GitHub Pages). |
-| `build-installer.ps1` | One-command build: publishes both apps and compiles the installer. |
-
-## Building from source
-
-Requires Visual Studio 2022 (or the .NET 8 SDK + MSBuild) and [Inno Setup](https://jrsoftware.org/isinfo.php)
-if you want to produce an installer rather than just running the app.
-
-```
-msbuild KidScreenTime.sln
-```
-
-To build a full versioned installer:
-
-```
-powershell -ExecutionPolicy Bypass -File build-installer.ps1 -Version 1.0.0
-```
 
 ## License
 
