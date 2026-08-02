@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What this app actually does to your PC — Kid Screen Time</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fdfcf8;
+    color: #222;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+    margin: 0 0 4px 0;
+    line-height: 1.25;
+  }
+
+  .tagline {
+    font-style: italic;
+    color: #555;
+    margin: 0 0 30px 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 46px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #222;
+    padding-bottom: 4px;
+    display: inline-block;
+  }
+
+  p {
+    margin: 0 0 16px 0;
+  }
+
+  ul {
+    margin: 0 0 16px 0;
+    padding-left: 22px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px dashed #aaa;
+    margin: 40px 0;
+  }
+
+  .box {
+    background: #f3f1e9;
+    border: 1px solid #ddd;
+    padding: 18px 20px;
+    margin: 20px 0;
+  }
+
+  .small {
+    font-size: 14px;
+    color: #666;
+  }
+
+  code {
+    background: #f3f1e9;
+    padding: 1px 5px;
+    font-size: 15px;
+    font-family: "Courier New", monospace;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px 0;
+    font-size: 16px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+
+  th {
+    border-bottom: 2px solid #222;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  footer {
+    margin-top: 60px;
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+  }
+
+  a {
+    color: #2d5a3d;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="index.html" class="back small">&larr; Back to Kid Screen Time</a>
+
+  <h1>What this app actually does to your PC</h1>
+  <p class="tagline">Specifics, not reassurance — so you can check my work instead of trusting my word.</p>
+
+  <p>If you don't know me personally, "trust me, it's safe" isn't worth much. This tool listens
+  to your microphone and installs a keyboard hook — those are exactly the kinds of things
+  antivirus software is built to be suspicious of, and honestly, you should be a little
+  suspicious too. So here's exactly what's in it, in plain terms, so you (or your antivirus,
+  or anyone who wants to read the code) can verify it instead of taking my word for it.</p>
+
+  <h2>No network activity, anywhere</h2>
+
+  <p>There is no networking code in this app at all — no HTTP requests, no analytics, no
+  "phone home" on startup, nothing. Everything it does happens entirely on your machine. That's
+  not a policy I promise to follow; it's an absence of code, which is checkable in the source
+  itself, or by watching the app in any network monitor and seeing nothing leave your machine.</p>
+
+  <h2>The keyboard hook doesn't see what you type</h2>
+
+  <p>The app installs a low-level keyboard hook, and I want to be specific about exactly what
+  that means, because "keyboard hook" understandably sounds like "keylogger." It isn't one. The
+  hook only ever looks at two things: which specific control key was pressed (to catch things
+  like Alt+Tab or the Windows key while the lock screen is up), and the timestamp of the most
+  recent keypress (to avoid mistaking a loud mechanical keyboard for a kid yelling — see below).
+  It never converts a keypress into an actual letter or character, never logs anything to disk,
+  and never sends anything anywhere. There is no code path in this app that could reconstruct
+  what you typed, in this app or any other.</p>
+
+  <h2>The microphone only measures loudness, never records</h2>
+
+  <p>Frustration detection listens to raw volume levels — is the room suddenly and sharply
+  louder than normal — not speech content. Nothing is transcribed, recorded, or saved to disk
+  at any point. It's the same as a sound meter: it looks at a number, decides if that number is
+  unusual, and forgets it a moment later.</p>
+
+  <h2>What actually gets installed on your computer</h2>
+
+  <table>
+    <tr><th>What</th><th>Where</th><th>Why</th></tr>
+    <tr>
+      <td>The app itself</td>
+      <td><code>%LocalAppData%\Programs\KidScreenTime</code></td>
+      <td>A per-user folder — the installer never asks for admin rights, because it doesn't
+      need them.</td>
+    </tr>
+    <tr>
+      <td>Your settings/schedule</td>
+      <td><code>%AppData%\KidScreenTime\config.json</code></td>
+      <td>Plain JSON, human-readable, yours to open and inspect any time. Your password is
+      stored as a salted hash, never in plain text.</td>
+    </tr>
+    <tr>
+      <td>Two Run-key entries</td>
+      <td><code>HKCU\...\Windows\CurrentVersion\Run</code></td>
+      <td>So the app (and a small watchdog that relaunches it if it's closed) start when you log
+      in. Both are per-user (<code>HKCU</code>), not machine-wide.</td>
+    </tr>
+  </table>
+
+  <p>All of it is per-user, not system-wide — nothing here touches Program Files, no service is
+  installed, and no other Windows account on the machine is affected.</p>
+
+  <h2>Why it fights back a little</h2>
+
+  <p>The watchdog process and the Run key entries exist for one reason: so a kid can't just
+  close the app and go back to unrestricted screen time. That same behavior is exactly what
+  antivirus heuristics are trained to flag — a background process that relaunches something if
+  it's closed looks, on paper, identical to malware persistence. I'd rather tell you that up
+  front than have you find out from a scary AV popup. There's an override password set up at
+  install time specifically so you're never locked out of your own computer — it's built to
+  resist a kid clicking around it, not to resist you.</p>
+
+  <div class="box">
+    <p style="margin-bottom:0;">If your antivirus flags the installer: that's a heuristic
+    match on "background process, restarts itself, hooks the keyboard" — a pattern, not a
+    verdict on the actual code. You're welcome to read the source yourself, or submit the file
+    to your antivirus vendor's false-positive review process.</p>
+  </div>
+
+  <h2>Verify the download yourself</h2>
+
+  <p>Before you run the installer, you can check that what you downloaded is exactly what I
+  built and nothing else:</p>
+
+  <ul>
+    <li>Compare the file's SHA-256 checksum against the one published on the download page.</li>
+    <li>Upload the installer to <a href="https://www.virustotal.com/" target="_blank" rel="noopener">VirusTotal</a>
+    and see how the major antivirus engines score it.</li>
+  </ul>
+
+  <p class="small">SHA-256 and a VirusTotal link for the current release are posted on the
+  download page.</p>
+
+  <hr>
+
+  <p class="small">Questions about any of this, or want to read the actual source before you
+  install it? Email me — I'd rather answer a question than have you install something you're
+  not sure about.</p>
+
+  <footer>
+    Kid Screen Time · Windows 10/11 · No account required · No data collected
+  </footer>
+
+</div>
+</body>
+</html>
