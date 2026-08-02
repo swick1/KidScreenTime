@@ -1,0 +1,84 @@
+Kid Screen Time — How It Helps
+================================
+
+Screens aren't the enemy. Used without any structure, though, they tend to create the same
+three problems in kids: too much undifferentiated time in front of them, not enough time away
+from them, and no practice handling the frustration games are specifically designed to
+provoke. Kid Screen Time is built around those three problems directly, not around generic
+"blocking" for its own sake.
+
+
+1. Too much screen time, whenever the kid wants it
+----------------------------------------------------
+The core of the app is a weekly schedule: a parent picks which blocks of time each day the
+computer is usable at all. Outside those blocks, the screen locks — no negotiation, no "just
+five more minutes," because the app isn't the one saying no, the calendar is.
+
+For families who care less about *when* and more about *how much*, Total Screen Time mode adds
+a second, stricter layer on top of the calendar: a daily cap on actual active time (e.g. 2
+hours), regardless of how wide the calendar window is. It only counts real activity — mouse
+and keyboard input — so a paused video or an idle, forgotten session doesn't quietly burn the
+budget. Once the cap is hit, the device locks for the day even if the calendar would otherwise
+allow more, and doesn't reopen until midnight.
+
+Warning sounds and toasts at 10 minutes, 5 minutes, 1 minute, and 10 seconds before a lock give
+the kid a real chance to save progress and wrap up, rather than getting cut off mid-task.
+
+
+2. Not enough time away from the screen
+------------------------------------------
+Reducing total time in front of a screen is only half the goal — the other half is making sure
+some of that reclaimed time actually turns into something else: moving, reading, being bored
+in a productive way.
+
+When a session ends without incident (see below), the app doesn't just say "nice job" — it
+shows a short list of concrete ideas for the break: go for a walk, get some water, read a few
+pages, shoot some hoops, draw something, listen to music. It's a nudge, not a mandate, but it
+puts a physical or offline alternative in front of the kid at exactly the moment they'd
+otherwise just sit there.
+
+The schedule design itself pushes the same direction: a parent can carve out deliberate gaps
+between sessions (a lunch break, an evening cutoff) so screen time is naturally interspersed
+with everything else in the day, instead of being one unbroken block.
+
+
+3. Learning to handle frustration, not just avoiding it
+------------------------------------------------------------
+This is the part most screen time tools skip entirely. Losing, dying, getting stuck — these
+are normal parts of playing anything worth playing, and getting upset about it isn't the
+problem. The problem is when frustration turns into yelling, banging on the desk, or a full
+meltdown, with no one there to help the kid notice it happening.
+
+Kid Screen Time listens for that specific pattern — sudden, sharp bursts of loud noise, not
+just background chatter or a loud game — using the microphone, entirely on-device. It's
+deliberately picky about what counts:
+  - It adapts to the room's normal background noise, so a noisy house or a running AC unit
+    doesn't trip it.
+  - It cross-checks against the computer's own audio output, so a loud sound effect or gunshot
+    in a game doesn't get mistaken for a real outburst.
+  - It filters out the keyboard itself, so a loud mechanical keyboard or rapid-fire clicking
+    during an intense moment (a rhythm game, a boss fight) doesn't get miscounted either.
+
+A single loud moment doesn't do anything — everybody has one of those. Only a real pattern of
+repeated outbursts within a short window triggers a short, mandatory break, framed as exactly
+that: a break, not a punishment. No lecture, no shame — just a calm screen, a rotating
+supportive message, a countdown, and the same list of things to go do instead.
+
+The goal isn't to prevent frustration. It's to give a kid a beat to notice it, step away, and
+come back having practiced doing that themselves — which is the actual skill, not "never
+getting upset in the first place."
+
+
+4. Reinforcing the behavior you want, not just the one you don't
+------------------------------------------------------------------
+Every one of these systems is easy to build as pure punishment: lock the screen, end the
+session, subtract time. Kid Screen Time also rewards the alternative. A session that ends
+clean — no outbursts at all — earns a small bonus block of extra time and a short pop-up
+celebrating it. A brief, encouraging recap (via Pixi, the app's mascot) shows up on the lock
+screen afterward too, matched to how the session actually went: proud when it went well,
+gentle and encouraging when it didn't.
+
+The point of all of it is the same: not to keep a kid off the computer, but to help them build
+a real, lasting relationship with it — one where time is bounded, breaks happen on purpose, and
+losing your temper is something you notice and recover from, not something that just happens
+to you.
